@@ -1,0 +1,14 @@
+alter table public.skills add column if not exists category text not null default 'Altro';
+alter table public.skills add column if not exists rating int not null default 3;
+do $$ begin if not exists (select 1 from pg_constraint where conname='skills_rating_check') then alter table public.skills add constraint skills_rating_check check (rating between 1 and 5); end if; end $$;
+update public.skills set category='Altro' where category is null or trim(category)='';
+update public.skills set rating=3 where rating is null or rating<1 or rating>5;
+create table if not exists public.analytics_events (id uuid primary key default gen_random_uuid(), profile_user_id uuid not null references auth.users(id) on delete cascade, event_type text not null check (event_type in ('profile_view','qr_scan')), public_slug text not null, path text default '', referrer text default '', user_agent text default '', created_at timestamptz not null default now());
+alter table public.analytics_events enable row level security;
+drop policy if exists "analytics insert public" on public.analytics_events;
+drop policy if exists "analytics owner select" on public.analytics_events;
+create policy "analytics insert public" on public.analytics_events for insert with check (true);
+create policy "analytics owner select" on public.analytics_events for select using (auth.uid()=profile_user_id);
+create index if not exists idx_analytics_profile_created on public.analytics_events(profile_user_id, created_at desc);
+create index if not exists idx_skills_category_user on public.skills(user_id, category);
+create index if not exists idx_skills_name on public.skills(name);
