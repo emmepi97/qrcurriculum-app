@@ -1,0 +1,7 @@
+'use client';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { DICT, getInitialLang } from '@/lib/i18n';
+const LanguageContext=createContext(null);
+export function LanguageProvider({children}){ const [lang,setLangState]=useState('it'); useEffect(()=>setLangState(getInitialLang()),[]); function setLang(next){ setLangState(next); if(typeof window!=='undefined') localStorage.setItem('qrcv-lang',next); } const value=useMemo(()=>({lang,setLang,t:DICT[lang]||DICT.it}),[lang]); return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>; }
+export function useLang(){ return useContext(LanguageContext)||{lang:'it',setLang:()=>{},t:DICT.it}; }
+export function LanguageToggle(){ const {lang,setLang}=useLang(); return <button className="langToggle" type="button" onClick={()=>setLang(lang==='it'?'en':'it')}>{lang==='it'?'EN':'IT'}</button>; }
