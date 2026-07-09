@@ -46,3 +46,255 @@ body>div,body main{max-width:none!important;}
 .pdfExportOnly.pdfExportReady{visibility:visible!important;}
 @media(max-width:1100px){.heroPanel,.workspace,.bigError,.analyticsGrid,.radarPageLayout,.directoryGrid,.monetizationPage,.adminTables,.adminPanelCard,.adminTabs,.analyticsInfoBox{width:calc(100vw - 18px)!important;}.workspace{grid-template-columns:1fr!important;}}
 @media(max-width:680px){.heroPanel,.workspace,.bigError,.analyticsGrid,.radarPageLayout,.directoryGrid,.monetizationPage,.adminTables,.adminPanelCard,.adminTabs,.analyticsInfoBox{width:calc(100vw - 12px)!important;}.cvPreviewViewport{padding:8px!important;}}
+
+/* =========================================================
+   FINAL FIX 2026-07-09 - A4 FIT + DASHBOARD FULL PAGE
+   Obiettivo:
+   - dashboard realmente a pagina intera
+   - anteprima CV centrata, senza scrollbar orizzontale
+   - foglio A4 sempre contenuto nel riquadro preview
+   - export PDF nascosto lasciato in formato A4 reale
+   ========================================================= */
+
+html,
+body{
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+  overflow-x:hidden!important;
+}
+
+body > div,
+body main{
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+}
+
+.topbar{
+  width:100%!important;
+  max-width:none!important;
+  left:0!important;
+  right:0!important;
+}
+
+.heroPanel,
+.workspace,
+.bigError,
+.analyticsGrid,
+.radarPageLayout,
+.directoryGrid,
+.monetizationPage,
+.adminTables,
+.adminPanelCard,
+.adminTabs,
+.analyticsInfoBox{
+  width:calc(100vw - 24px)!important;
+  max-width:none!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+
+.workspace{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:22px!important;
+  align-items:start!important;
+}
+
+.editorColumn,
+.previewColumn,
+.smartSection.wideSection{
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+}
+
+.previewSticky{
+  position:relative!important;
+  top:auto!important;
+  width:100%!important;
+  max-height:none!important;
+  overflow:hidden!important;
+  background:#e9edf5!important;
+}
+
+.previewHead{
+  width:100%!important;
+  max-width:none!important;
+}
+
+.previewActions,
+.previewToolbar{
+  max-width:100%!important;
+  flex-wrap:wrap!important;
+}
+
+.cvPreviewViewport{
+  width:100%!important;
+  max-width:100%!important;
+  min-height:72vh!important;
+  max-height:none!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:flex-start!important;
+  padding:18px!important;
+  background:#cfd5df!important;
+}
+
+.cvPreviewCanvas{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0 auto!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:flex-start!important;
+  transform:none!important;
+}
+
+.cvPreviewViewport .cv-page{
+  width:min(210mm,100%)!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0 auto!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:#fff!important;
+}
+
+.cvPreviewViewport .cv-page *,
+.previewModalBody .cv-page *,
+.publicPage .cv-page *{
+  box-sizing:border-box!important;
+  max-width:100%!important;
+  overflow-wrap:break-word!important;
+  word-wrap:break-word!important;
+}
+
+.cvPreviewViewport .cv-page p,
+.cvPreviewViewport .cv-page h1,
+.cvPreviewViewport .cv-page h2,
+.cvPreviewViewport .cv-page h3,
+.cvPreviewViewport .cv-page span,
+.cvPreviewViewport .cv-page div{
+  word-break:normal!important;
+}
+
+.cvPreviewViewport.zoom-fit .cvPreviewCanvas,
+.cvPreviewViewport.zoom-100 .cvPreviewCanvas,
+.cvPreviewViewport.zoom-125 .cvPreviewCanvas,
+.cvPreviewViewport.zoom-150 .cvPreviewCanvas{
+  width:100%!important;
+  max-width:100%!important;
+  transform:none!important;
+  margin-bottom:0!important;
+}
+
+.cvPreviewViewport.zoom-fit .cv-page,
+.cvPreviewViewport.zoom-100 .cv-page,
+.cvPreviewViewport.zoom-125 .cv-page,
+.cvPreviewViewport.zoom-150 .cv-page{
+  width:min(210mm,100%)!important;
+  max-width:100%!important;
+}
+
+.previewModalBody{
+  overflow:auto!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:flex-start!important;
+}
+
+.previewModalBody .cv-page,
+.publicPage .cv-page,
+#cv-document,
+.cv-page{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
+
+.pdfExportOnly{
+  visibility:hidden!important;
+  position:fixed!important;
+  left:-10000px!important;
+  top:0!important;
+  width:210mm!important;
+  height:297mm!important;
+  overflow:hidden!important;
+  background:#fff!important;
+  pointer-events:none!important;
+  z-index:-1!important;
+}
+
+.pdfExportOnly.pdfExportReady{
+  visibility:visible!important;
+}
+
+.pdfExportOnly .cv-page{
+  width:210mm!important;
+  max-width:210mm!important;
+  min-width:210mm!important;
+  min-height:0!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:5mm 6mm!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+  background:#fff!important;
+  box-sizing:border-box!important;
+}
+
+@media(max-width:1100px){
+  .heroPanel,
+  .workspace,
+  .bigError,
+  .analyticsGrid,
+  .radarPageLayout,
+  .directoryGrid,
+  .monetizationPage,
+  .adminTables,
+  .adminPanelCard,
+  .adminTabs,
+  .analyticsInfoBox{
+    width:calc(100vw - 18px)!important;
+  }
+
+  .workspace{
+    grid-template-columns:1fr!important;
+  }
+}
+
+@media(max-width:680px){
+  .heroPanel,
+  .workspace,
+  .bigError,
+  .analyticsGrid,
+  .radarPageLayout,
+  .directoryGrid,
+  .monetizationPage,
+  .adminTables,
+  .adminPanelCard,
+  .adminTabs,
+  .analyticsInfoBox{
+    width:calc(100vw - 12px)!important;
+  }
+
+  .heroPanel{
+    padding:20px!important;
+  }
+
+  .cvPreviewViewport{
+    padding:8px!important;
+    min-height:65vh!important;
+  }
+}
