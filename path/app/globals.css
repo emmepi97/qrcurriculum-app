@@ -1,43 +1,490 @@
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #142033;
+  --muted: #667085;
+  --border: #dde4f0;
+  --primary: #1677ff;
+  --primary2: #0f4ea8;
+  --danger: #b42318;
+  --success: #137333;
+  --warning: #9a6700;
+  --shadow: 0 12px 32px rgba(16, 24, 40, 0.08);
+  --dark: #0b1630;
+}
+
 /* =========================================================
-   FINAL CLEAN FIX - CV RESPONSIVE + PDF A4
-   Data: 2026-07-09
-   Obiettivo:
-   - CV online/anteprima senza contorno
-   - Dashboard/editor full page
-   - Anteprima centrata e responsive
-   - Font del CV adattivi
-   - Export PDF mantenuto in A4 reale
+   RESET GENERALE
    ========================================================= */
 
-/* RESET BASE LAYOUT */
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
-  width: 100% !important;
-  max-width: none !important;
-  min-width: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow-x: hidden !important;
-  background: var(--bg) !important;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, Arial, sans-serif;
 }
 
 body > div,
 body main {
-  width: 100% !important;
-  max-width: none !important;
-  min-width: 0 !important;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
 }
 
-/* TOPBAR FULL WIDTH */
+a {
+  color: inherit;
+}
+
+/* =========================================================
+   BOTTONI / STATI / UTILITY
+   ========================================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+  gap: 8px;
+}
+
+.btn.primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+.btn.light {
+  background: #ffffff;
+  color: var(--primary2);
+  border-color: #ffffff;
+}
+
+.btn.big {
+  padding: 13px 18px;
+  font-size: 16px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error {
+  color: var(--danger);
+  font-weight: 800;
+}
+
+.success {
+  color: var(--success);
+  font-weight: 800;
+}
+
+.warning {
+  color: var(--warning);
+  font-weight: 800;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.muted-small {
+  color: #555555;
+  font-size: clamp(10px, 0.72vw, 13px);
+}
+
+.hint {
+  background: #eef6ff;
+  border: 1px solid #cfe5ff;
+  border-radius: 14px;
+  padding: 10px 12px;
+  color: #174ea6;
+  font-weight: 700;
+}
+
+.linkButton,
+.backLink {
+  border: 0;
+  background: transparent;
+  color: var(--primary);
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.langToggle {
+  border: 1px solid var(--border);
+  background: #ffffff;
+  border-radius: 999px;
+  font-weight: 900;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+/* =========================================================
+   LANDING / MARKETING PAGE
+   ========================================================= */
+
+.marketingPage {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top right, #dbeafe, transparent 34%),
+    linear-gradient(180deg, #f8fbff, #eef3fb);
+}
+
+.marketingNav {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.logoMark {
+  font-size: 24px;
+  font-weight: 950;
+  color: var(--dark);
+  text-decoration: none;
+}
+
+.logoMark span {
+  color: var(--primary);
+}
+
+.marketingNav nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-weight: 800;
+}
+
+.marketingHero {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 52px 22px 30px;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.heroCopy h1 {
+  font-size: 62px;
+  line-height: 0.98;
+  margin: 18px 0;
+  letter-spacing: -2px;
+  color: var(--dark);
+}
+
+.heroCopy p {
+  font-size: 21px;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 720px;
+}
+
+.badge {
+  display: inline-flex;
+  background: #eaf2ff;
+  color: #174ea6;
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-weight: 900;
+}
+
+.heroCtas,
+.homeActions,
+.topbar nav,
+.heroSide,
+.simpleRowActions,
+.tourActions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.trustStrip {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+.trustStrip span {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-weight: 800;
+  color: #344054;
+}
+
+.browserCard {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: 0 30px 80px rgba(16, 24, 40, 0.14);
+  padding: 18px;
+  min-height: 390px;
+}
+
+.browserTop {
+  display: flex;
+  gap: 7px;
+  margin-bottom: 18px;
+}
+
+.browserTop i {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #c8d3e4;
+}
+
+.profileMock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #13233f, #2d73e6);
+  color: #ffffff;
+  border-radius: 22px;
+  padding: 22px;
+}
+
+.profileMock h3 {
+  font-size: 28px;
+  margin: 0 0 6px;
+}
+
+.qrMock {
+  width: 86px;
+  height: 86px;
+  border-radius: 16px;
+  background: repeating-linear-gradient(45deg, #ffffff 0 9px, #13233f 9px 14px);
+}
+
+.mockLine {
+  height: 14px;
+  background: #e6ecf5;
+  border-radius: 999px;
+  margin-top: 16px;
+  width: 62%;
+}
+
+.mockLine.large {
+  width: 94%;
+  margin-top: 28px;
+}
+
+.mockGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.mockGrid span {
+  height: 100px;
+  background: #f0f5fc;
+  border-radius: 18px;
+}
+
+.featureGrid {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 28px 22px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.featureGrid article,
+.howItWorks,
+.authCard,
+.smartSection,
+.legalCard,
+.metricCard {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.featureGrid strong {
+  color: var(--primary);
+  font-weight: 900;
+}
+
+.featureGrid p,
+.howItWorks p {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.howItWorks {
+  max-width: 1176px;
+  margin: 18px auto 34px;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.howItWorks h2 {
+  font-size: 34px;
+  margin: 0 0 8px;
+}
+
+.howItWorks ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+  min-width: 420px;
+}
+
+.howItWorks li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+}
+
+.howItWorks li span {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marketingFooter {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 24px 22px 40px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+/* =========================================================
+   AUTH / LEGAL
+   ========================================================= */
+
+.authPage,
+.legalPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.authCard {
+  max-width: 440px;
+  width: 100%;
+}
+
+.legalCard {
+  max-width: 900px;
+  width: 100%;
+  line-height: 1.55;
+}
+
+.authCard label,
+.quickForm label,
+.personalForm label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.authCard input,
+.quickForm input,
+.quickForm textarea,
+.quickForm select,
+.personalForm input,
+.personalForm textarea,
+.personalForm select {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+  font: inherit;
+  background: #ffffff;
+}
+
+/* =========================================================
+   TOPBAR / DASHBOARD
+   ========================================================= */
+
 .topbar {
-  width: 100% !important;
-  max-width: none !important;
-  left: 0 !important;
-  right: 0 !important;
-  box-sizing: border-box !important;
+  min-height: 66px;
+  width: 100%;
+  max-width: none;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }
 
-/* DASHBOARD / EDITOR FULL PAGE */
+.topbar .brandBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar .brandBlock span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.topbar nav a,
+.topbar nav button {
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* =========================================================
+   HERO / WORKSPACE FULL PAGE
+   ========================================================= */
+
 .heroPanel,
 .workspace,
 .bigError,
@@ -49,101 +496,343 @@ body main {
 .adminPanelCard,
 .adminTabs,
 .analyticsInfoBox {
-  width: calc(100vw - 24px) !important;
-  max-width: none !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  box-sizing: border-box !important;
+  width: calc(100vw - 24px);
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Editor e preview una sotto l'altra, così non stringe il CV */
+.heroPanel {
+  margin-top: 18px;
+  margin-bottom: 18px;
+  background: linear-gradient(135deg, #10203f, #1976ff);
+  color: #ffffff;
+  border-radius: 28px;
+  padding: 28px 34px;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+}
+
+.cleanHero h1 {
+  margin: 0 0 8px;
+  font-size: 42px;
+}
+
+.cleanHero p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 17px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 900;
+  margin-bottom: 8px;
+  color: #cfe0ff;
+}
+
+.publicUrl {
+  margin-top: 12px;
+  font-size: 14px;
+  word-break: break-all;
+}
+
+.qrPreview {
+  width: 96px;
+  height: 96px;
+  background: #ffffff;
+  padding: 6px;
+  border-radius: 16px;
+}
+
 .workspace {
-  display: grid !important;
-  grid-template-columns: minmax(0, 1fr) !important;
-  gap: 22px !important;
-  align-items: start !important;
+  margin-top: 0;
+  margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
 }
 
 .editorColumn,
 .previewColumn,
 .smartSection.wideSection {
-  width: 100% !important;
-  max-width: none !important;
-  min-width: 0 !important;
-  box-sizing: border-box !important;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
 }
 
-/* CONTENITORE PREVIEW */
+.editorColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.smartSectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 14px;
+}
+
+.smartSectionHeader h2 {
+  margin: 0 0 4px;
+  font-size: 26px;
+}
+
+.smartSectionHeader p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.sectionCount {
+  display: inline-flex;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #174ea6;
+  background: #eaf2ff;
+  border-radius: 999px;
+  padding: 5px 9px;
+  font-weight: 800;
+}
+
+/* =========================================================
+   FORM / ROWS
+   ========================================================= */
+
+.personalForm,
+.quickForm {
+  background: #f7faff;
+  border: 1px solid #dce7fb;
+  border-radius: 20px;
+  padding: 16px;
+  margin: 14px 0;
+}
+
+.personalGrid,
+.quickFormGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.wide {
+  grid-column: 1 / -1;
+}
+
+.check {
+  flex-direction: row !important;
+  align-items: center;
+}
+
+.compactCheck {
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.miniCheck {
+  font-size: 12px !important;
+  color: #475467;
+  margin-top: 5px;
+}
+
+.miniCheck input {
+  width: auto;
+}
+
+.fieldWithVisibility {
+  display: flex;
+  flex-direction: column;
+}
+
+.formFooter,
+.quickFormActions {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.splitActions {
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.simpleRows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.simpleRow {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 13px 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  background: #ffffff;
+}
+
+.simpleRowMain strong {
+  display: block;
+}
+
+.simpleRowMain span {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 3px;
+  max-width: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.simpleRowActions button {
+  border: 0;
+  background: transparent;
+  color: var(--primary);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.simpleRowActions button.danger {
+  color: var(--danger);
+}
+
+.hiddenPill {
+  font-size: 12px;
+  background: #fff4e5;
+  color: #9a5b00;
+  border: 1px solid #ffd89b;
+  border-radius: 999px;
+  padding: 4px 8px;
+}
+
+.lightPill {
+  background: #eef6ff;
+  color: #174ea6;
+  border-color: #cfe5ff;
+}
+
+/* =========================================================
+   PREVIEW CV - SENZA CONTORNO / SENZA PAGINE A4 VISIBILI
+   ========================================================= */
+
 .previewSticky {
-  position: relative !important;
-  top: auto !important;
-  width: 100% !important;
-  max-height: none !important;
-  overflow: hidden !important;
-  background: #eef2f7 !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  box-sizing: border-box !important;
+  position: relative;
+  top: auto;
+  width: 100%;
+  max-height: none;
+  overflow: hidden;
+  background: #ffffff;
+  border: 0;
+  border-radius: 22px;
+  padding: 14px;
+  box-shadow: none;
 }
 
-/* HEADER PREVIEW */
 .previewHead {
-  width: 100% !important;
-  max-width: none !important;
-  gap: 12px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
-.previewActions,
+.previewActions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.previewNote {
+  font-size: 12px;
+  margin: 3px 0 0;
+}
+
 .previewToolbar {
-  max-width: 100% !important;
-  flex-wrap: wrap !important;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0 0 10px;
+  flex-wrap: wrap;
 }
 
-/* VIEWPORT ANTEPRIMA CV */
+.previewToolbar span {
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.previewToolbar button {
+  border: 1px solid var(--border);
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.previewToolbar button.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
 .cvPreviewViewport {
-  width: 100% !important;
-  max-width: 100% !important;
-  min-height: 72vh !important;
-  max-height: none !important;
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: flex-start !important;
-  padding: clamp(10px, 2vw, 28px) !important;
-  background: #eef2f7 !important;
-  border-radius: 18px !important;
-  box-sizing: border-box !important;
+  width: 100%;
+  max-width: 100%;
+  min-height: 72vh;
+  max-height: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0;
+  background: #ffffff;
+  border-radius: 0;
 }
 
-/* CANVAS PREVIEW */
 .cvPreviewCanvas {
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  margin: 0 auto !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: flex-start !important;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   transform: none !important;
-  box-sizing: border-box !important;
 }
 
-/* Disattiva gli zoom vecchi che deformavano il CV */
 .cvPreviewViewport.zoom-fit .cvPreviewCanvas,
 .cvPreviewViewport.zoom-100 .cvPreviewCanvas,
 .cvPreviewViewport.zoom-125 .cvPreviewCanvas,
 .cvPreviewViewport.zoom-150 .cvPreviewCanvas {
-  width: 100% !important;
-  max-width: 100% !important;
+  width: 100%;
+  max-width: 100%;
   transform: none !important;
   margin-bottom: 0 !important;
 }
 
 /* =========================================================
-   CV ONLINE / PREVIEW
-   Questo è il CV visibile nell'editor, nella preview e nella pagina pubblica.
-   Non è più trattato come foglio con bordo/ombra.
+   CV ONLINE / PREVIEW / PUBLIC
+   Qui il CV NON è A4.
+   È una pagina web full width.
    ========================================================= */
 
 .cv-page,
@@ -151,217 +840,234 @@ body main {
 .cvPreviewViewport .cv-page,
 .previewModalBody .cv-page,
 .publicPage .cv-page {
-  width: min(210mm, 100%) !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  min-height: auto !important;
-  margin: 0 auto !important;
-  padding: clamp(18px, 3vw, 42px) !important;
-  background: #ffffff !important;
-  color: #222 !important;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  min-height: auto;
+  margin: 0 auto;
+  padding: clamp(22px, 3vw, 56px);
+  background: #ffffff;
+  color: #222222;
   border: 0 !important;
   outline: 0 !important;
   box-shadow: none !important;
-  overflow: hidden !important;
-  box-sizing: border-box !important;
-
-  /* font responsive */
-  font-family: Arial, sans-serif !important;
-  font-size: clamp(10px, 0.78vw, 14px) !important;
-  line-height: 1.35 !important;
+  overflow: visible;
+  font-family: Arial, sans-serif;
+  font-size: clamp(10px, 0.78vw, 15px);
+  line-height: 1.32;
 }
 
-/* Tutto dentro il CV deve stare dentro il foglio */
 .cv-page *,
 #cv-document *,
 .cvPreviewViewport .cv-page *,
 .previewModalBody .cv-page *,
 .publicPage .cv-page * {
-  box-sizing: border-box !important;
-  max-width: 100% !important;
-  overflow-wrap: break-word !important;
-  word-wrap: break-word !important;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
-/* Titolo principale */
 .cv-page h1,
 #cv-document h1 {
-  margin: 0 0 4px !important;
-  font-size: clamp(22px, 2.4vw, 42px) !important;
-  line-height: 1.05 !important;
-  letter-spacing: -0.03em !important;
+  margin: 0 0 4px;
+  font-size: clamp(24px, 2.6vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
 }
 
-/* Titoli sezioni */
 .cv-page h2,
 #cv-document h2 {
-  margin-top: clamp(14px, 1.6vw, 24px) !important;
-  margin-bottom: clamp(5px, 0.7vw, 10px) !important;
-  padding-bottom: 4px !important;
-  font-size: clamp(13px, 1.1vw, 20px) !important;
-  line-height: 1.2 !important;
-  border-bottom: 1px solid #dde4f0 !important;
+  margin-top: clamp(12px, 1.4vw, 24px);
+  margin-bottom: clamp(5px, 0.7vw, 10px);
+  padding-bottom: 4px;
+  font-size: clamp(14px, 1.15vw, 22px);
+  line-height: 1.2;
+  border-bottom: 1px solid #dde4f0;
 }
 
-/* Titoli elementi */
 .cv-page h3,
 #cv-document h3 {
-  margin: 0 !important;
-  font-size: clamp(11px, 0.9vw, 16px) !important;
-  line-height: 1.25 !important;
+  margin: 0;
+  font-size: clamp(12px, 0.95vw, 17px);
+  line-height: 1.25;
 }
 
-/* Paragrafi */
 .cv-page p,
 #cv-document p {
-  margin: 3px 0 5px !important;
-  white-space: pre-line !important;
-  font-size: inherit !important;
-  line-height: 1.35 !important;
+  margin: 3px 0 5px;
+  white-space: pre-line;
+  font-size: inherit;
+  line-height: 1.32;
 }
 
-/* Header CV */
+.cv-page section,
+#cv-document section {
+  page-break-inside: avoid;
+}
+
 .header-flex {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  gap: clamp(12px, 2vw, 28px) !important;
-  margin-bottom: clamp(8px, 1vw, 16px) !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: clamp(12px, 2vw, 28px);
+  margin-bottom: clamp(8px, 1vw, 16px);
 }
 
 .header-main {
-  min-width: 0 !important;
-  flex: 1 !important;
+  min-width: 0;
+  flex: 1;
 }
 
-/* Job title */
 .headline {
-  font-size: clamp(13px, 1.2vw, 22px) !important;
-  font-weight: 600 !important;
-  margin: 0 !important;
-  line-height: 1.25 !important;
+  font-size: clamp(14px, 1.2vw, 24px);
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.25;
 }
 
-/* Contatti */
 .contact-line {
-  font-size: clamp(9px, 0.78vw, 13px) !important;
-  color: #555 !important;
-  margin: 3px 0 0 !important;
-  line-height: 1.3 !important;
+  font-size: clamp(10px, 0.78vw, 14px);
+  color: #555555;
+  margin: 3px 0 0;
+  line-height: 1.3;
 }
 
-/* Foto profilo */
 .avatar-box {
-  width: clamp(72px, 10vw, 120px) !important;
-  height: clamp(72px, 10vw, 120px) !important;
-  border-radius: 50% !important;
-  overflow: hidden !important;
-  flex-shrink: 0 !important;
-  background: #eef2f7 !important;
+  width: clamp(76px, 9vw, 130px);
+  height: clamp(76px, 9vw, 130px);
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #eef2f7;
 }
 
 .avatar-box img,
 .avatar-box .photoPreview {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  display: block !important;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-/* Item esperienza/formazione/progetti */
+/* Esperienze / formazione / progetti */
 .item {
-  margin-bottom: clamp(7px, 0.8vw, 13px) !important;
-  page-break-inside: avoid !important;
+  margin-bottom: clamp(7px, 0.8vw, 13px);
+  page-break-inside: avoid;
 }
 
 .item-header {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: flex-start !important;
-  gap: 12px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
 }
 
 .item-meta {
-  font-size: clamp(9px, 0.72vw, 12px) !important;
-  color: #555 !important;
-  white-space: nowrap !important;
-  flex-shrink: 0 !important;
+  font-size: clamp(10px, 0.72vw, 13px);
+  color: #555555;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-/* Testi piccoli */
-.muted-small {
-  color: #555 !important;
-  font-size: clamp(9px, 0.72vw, 12px) !important;
-}
-
-/* Lingue e skill */
 .lang-list {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 5px 7px !important;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 7px;
 }
 
 .tag-pill,
 .lang-pill {
-  display: inline-block !important;
-  border: 1px solid #b8c2d0 !important;
-  border-radius: 999px !important;
-  padding: clamp(3px, 0.35vw, 6px) clamp(7px, 0.7vw, 12px) !important;
-  font-size: clamp(9px, 0.72vw, 12px) !important;
-  margin: 3px 5px 3px 0 !important;
-  line-height: 1.2 !important;
-  background: #ffffff !important;
+  display: inline-block;
+  border: 1px solid #b8c2d0;
+  border-radius: 999px;
+  padding: clamp(3px, 0.35vw, 6px) clamp(7px, 0.7vw, 12px);
+  font-size: clamp(10px, 0.72vw, 13px);
+  margin: 3px 5px 3px 0;
+  line-height: 1.2;
+  background: #ffffff;
 }
 
-/* QR finale */
 .qr-portfolio-block {
-  text-align: center !important;
-  margin-top: clamp(24px, 4vw, 50px) !important;
-  page-break-inside: avoid !important;
+  text-align: center;
+  margin-top: clamp(24px, 4vw, 56px);
+  page-break-inside: avoid;
 }
 
 .qr-portfolio-block img {
-  width: clamp(80px, 8vw, 120px) !important;
-  height: clamp(80px, 8vw, 120px) !important;
+  width: clamp(90px, 8vw, 125px);
+  height: clamp(90px, 8vw, 125px);
 }
 
 .qr-small-text {
-  font-size: clamp(10px, 0.8vw, 14px) !important;
-  color: #555 !important;
-  margin-top: 8px !important;
-  line-height: 1.25 !important;
+  font-size: clamp(11px, 0.8vw, 15px);
+  color: #555555;
+  margin-top: 8px;
+  line-height: 1.25;
 }
 
-/* PAGINA PUBBLICA */
+/* =========================================================
+   PUBLIC PAGE
+   ========================================================= */
+
 .publicPage {
-  min-height: 100vh !important;
-  background: #ffffff !important;
-  padding: clamp(12px, 2vw, 28px) !important;
-  box-sizing: border-box !important;
+  min-height: 100vh;
+  background: #ffffff;
+  padding: 0;
 }
 
 .publicActions {
-  max-width: 210mm !important;
-  margin: 0 auto 12px !important;
+  max-width: none;
+  margin: 0;
+  padding: 12px 18px;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  background: #ffffff;
 }
 
-/* MODALE PREVIEW */
+/* =========================================================
+   MODALE PREVIEW
+   ========================================================= */
+
+.previewModal {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.previewModalTop {
+  min-height: 68px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 22px;
+}
+
 .previewModalBody {
-  overflow: auto !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: flex-start !important;
-  background: #eef2f7 !important;
+  flex: 1;
+  overflow: auto;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #ffffff;
 }
 
 .previewModalBody .cv-page {
-  margin: 24px auto !important;
+  margin: 0 auto;
 }
 
 /* =========================================================
    EXPORT PDF
-   Qui il CV torna A4 reale.
-   Non usare font responsive qui, altrimenti il PDF cambia.
+   Qui invece il CV TORNA A4.
+   Questa parte serve solo per il PDF nascosto.
    ========================================================= */
 
 .pdfExportOnly {
@@ -396,13 +1102,17 @@ body main {
   background: #ffffff !important;
   overflow: hidden !important;
   box-sizing: border-box !important;
-
   font-family: Arial, sans-serif !important;
-  font-size: 7.2px !important;
-  line-height: 1.12 !important;
+  font-size: 7.1px !important;
+  line-height: 1.1 !important;
 }
 
-/* Font PDF compatti */
+.pdfExportOnly .cv-page * {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+  overflow-wrap: break-word !important;
+}
+
 .pdfExportOnly .cv-page h1 {
   font-size: 14px !important;
   margin: 0 0 2px !important;
@@ -414,7 +1124,7 @@ body main {
   margin-top: 6px !important;
   margin-bottom: 2px !important;
   padding-bottom: 1px !important;
-  border-bottom: 1px solid #ddd !important;
+  border-bottom: 1px solid #dddddd !important;
 }
 
 .pdfExportOnly .cv-page h3 {
@@ -424,7 +1134,7 @@ body main {
 
 .pdfExportOnly .cv-page p {
   margin: 0 0 1px !important;
-  line-height: 1.12 !important;
+  line-height: 1.1 !important;
 }
 
 .pdfExportOnly .headline {
@@ -446,7 +1156,7 @@ body main {
   font-size: 6.2px !important;
   padding: 1px 4px !important;
   margin: 1px 2px 1px 0 !important;
-  border: 1px solid #aaa !important;
+  border: 1px solid #aaaaaa !important;
 }
 
 .pdfExportOnly .avatar-box {
@@ -467,10 +1177,423 @@ body main {
   font-size: 6.5px !important;
 }
 
-/* PRINT NATIVO BROWSER */
+/* =========================================================
+   ANALYTICS / RADAR / MONETIZATION / ADMIN
+   ========================================================= */
+
+.analyticsGrid {
+  margin-bottom: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.metricCard span {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.metricCard strong {
+  display: block;
+  font-size: 42px;
+  margin-top: 8px;
+}
+
+.barList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: 120px 1fr 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.barRow div {
+  background: #edf2fb;
+  border-radius: 999px;
+  position: relative;
+  height: 26px;
+  overflow: hidden;
+}
+
+.barRow i {
+  display: block;
+  background: #1f6feb;
+  height: 100%;
+  border-radius: 999px;
+  min-width: 3px;
+}
+
+.barRow i.qrBar {
+  background: #13a37f;
+}
+
+.barRow b {
+  position: absolute;
+  left: 10px;
+  top: 5px;
+  font-size: 12px;
+}
+
+.radarPageLayout {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.radarTop {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 18px;
+}
+
+.radarSvgWrap {
+  background: #f8fbff;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  min-height: 520px;
+}
+
+.radarSvg {
+  width: min(720px, 100%);
+  height: auto;
+}
+
+.radarGrid {
+  fill: none;
+  stroke: #d8e1ef;
+  stroke-width: 1;
+}
+
+.radarAxis {
+  stroke: #d8e1ef;
+  stroke-width: 1;
+}
+
+.radarLabel {
+  font-size: 11px;
+  fill: #475467;
+  font-weight: 800;
+}
+
+.radarArea {
+  fill: rgba(31, 111, 235, 0.22);
+  stroke: #1f6feb;
+  stroke-width: 2;
+}
+
+.radarDot {
+  fill: #1f6feb;
+}
+
+.scoreCircle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: conic-gradient(var(--primary) var(--score), #e5eaf2 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.scoreCircle strong {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+}
+
+.tagCloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tagPill {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #ffffff;
+  padding: 7px 10px;
+  font-weight: 800;
+}
+
+.suggestionGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.suggestionCard {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 14px;
+}
+
+.photoPreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photoInlinePreview {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.photoInlinePreview .imagePlaceholder,
+.photoInlinePreview .photoPreview {
+  width: 74px;
+  height: 74px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+}
+
+.imagePlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef2f7;
+  color: #667085;
+  font-weight: 900;
+}
+
+.sectionTabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.sectionTabs button {
+  border: 1px solid var(--border);
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.sectionTabs button.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+.sectionTabs button span {
+  margin-left: 6px;
+}
+
+.lazyBox {
+  border: 1px dashed #cbd5e1;
+  background: #f8fafc;
+  border-radius: 18px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.monetizationGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.miniCard {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 16px;
+  margin-top: 12px;
+}
+
+.miniCard.full {
+  grid-column: 1 / -1;
+}
+
+.checkGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.reviewCard {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 14px;
+  margin: 10px 0;
+}
+
+.paywallBox {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 22px;
+  padding: 24px;
+  text-align: center;
+}
+
+.directoryGrid {
+  margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.adminTabs {
+  margin-bottom: 14px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.adminTabs button {
+  border: 1px solid var(--border);
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.adminTabs button.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+.adminSearch input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+  margin: 12px 0;
+}
+
+.adminCheck {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+  background: #ffffff;
+}
+
+.adminTableWrap {
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.adminDataTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.adminDataTable th,
+.adminDataTable td {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.adminDataTable th {
+  background: #f8fafc;
+  font-weight: 900;
+}
+
+.adminDataTable button {
+  border: 0;
+  background: transparent;
+  color: var(--primary);
+  font-weight: 900;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.adminDataTable button.danger {
+  color: var(--danger);
+}
+
+.monetizationExplain p {
+  margin-bottom: 0;
+}
+
+/* =========================================================
+   TOUR
+   ========================================================= */
+
+.tourOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.58);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+}
+
+.tourCard {
+  width: min(520px, 100%);
+  background: #ffffff;
+  border-radius: 26px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28);
+  padding: 26px;
+}
+
+.tourProgress {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.tourProgress span {
+  display: block;
+  height: 100%;
+  background: var(--primary);
+}
+
+.tourStep {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+/* =========================================================
+   PRINT NATIVO BROWSER
+   ========================================================= */
+
 @media print {
   body {
-    background: #ffffff !important;
+    background: #ffffff;
   }
 
   .publicActions,
@@ -510,11 +1633,40 @@ body main {
     border: 0 !important;
     outline: 0 !important;
     box-shadow: none !important;
+    font-size: 7.1px !important;
+    line-height: 1.1 !important;
   }
 }
 
-/* RESPONSIVE TABLET */
+/* =========================================================
+   RESPONSIVE TABLET
+   ========================================================= */
+
 @media (max-width: 1100px) {
+  .marketingHero,
+  .radarTop {
+    grid-template-columns: 1fr;
+  }
+
+  .featureGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .howItWorks {
+    flex-direction: column;
+  }
+
+  .howItWorks ol {
+    min-width: 0;
+  }
+
+  .suggestionGrid,
+  .monetizationGrid,
+  .directoryGrid,
+  .analyticsGrid {
+    grid-template-columns: 1fr;
+  }
+
   .heroPanel,
   .workspace,
   .bigError,
@@ -526,25 +1678,55 @@ body main {
   .adminPanelCard,
   .adminTabs,
   .analyticsInfoBox {
-    width: calc(100vw - 18px) !important;
+    width: calc(100vw - 18px);
   }
 
   .workspace {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 1fr;
   }
 
-  .cv-page,
-  #cv-document,
-  .cvPreviewViewport .cv-page,
-  .previewModalBody .cv-page,
-  .publicPage .cv-page {
-    width: 100% !important;
-    max-width: 100% !important;
+  .radarSvgWrap {
+    min-height: auto;
   }
 }
 
-/* RESPONSIVE MOBILE */
+/* =========================================================
+   RESPONSIVE MOBILE
+   ========================================================= */
+
 @media (max-width: 680px) {
+  .marketingNav,
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .marketingHero {
+    padding-top: 24px;
+  }
+
+  .heroCopy h1 {
+    font-size: 36px;
+    letter-spacing: -1px;
+  }
+
+  .heroCopy p {
+    font-size: 17px;
+  }
+
+  .featureGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .profileMock,
+  .marketingFooter,
+  .heroPanel,
+  .smartSectionHeader,
+  .simpleRow {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .heroPanel,
   .workspace,
   .bigError,
@@ -556,17 +1738,40 @@ body main {
   .adminPanelCard,
   .adminTabs,
   .analyticsInfoBox {
-    width: calc(100vw - 12px) !important;
+    width: calc(100vw - 12px);
   }
 
   .heroPanel {
-    padding: 20px !important;
+    padding: 20px;
+  }
+
+  .cleanHero h1 {
+    font-size: 30px;
+  }
+
+  .quickFormActions .btn,
+  .formFooter .btn,
+  .previewActions .btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .barRow {
+    grid-template-columns: 1fr;
+  }
+
+  .simpleRowActions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .browserCard {
+    min-height: 0;
   }
 
   .cvPreviewViewport {
-    padding: 8px !important;
-    min-height: 65vh !important;
-    border-radius: 14px !important;
+    padding: 0;
+    min-height: 65vh;
   }
 
   .cv-page,
@@ -574,26 +1779,26 @@ body main {
   .cvPreviewViewport .cv-page,
   .previewModalBody .cv-page,
   .publicPage .cv-page {
-    padding: 18px !important;
-    font-size: 10px !important;
+    padding: 18px;
+    font-size: 10px;
   }
 
   .header-flex {
-    align-items: flex-start !important;
-    flex-direction: column !important;
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .avatar-box {
-    width: 86px !important;
-    height: 86px !important;
+    width: 86px;
+    height: 86px;
   }
 
   .item-header {
-    flex-direction: column !important;
-    gap: 2px !important;
+    flex-direction: column;
+    gap: 2px;
   }
 
   .item-meta {
-    white-space: normal !important;
+    white-space: normal;
   }
 }
