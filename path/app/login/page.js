@@ -27,8 +27,14 @@ function LoginContent() {
 
     const res =
       mode === 'login'
-        ? await supabase.auth.signInWithPassword({ email, password })
-        : await supabase.auth.signUp({ email, password });
+        ? await supabase.auth.signInWithPassword({
+            email,
+            password,
+          })
+        : await supabase.auth.signUp({
+            email,
+            password,
+          });
 
     setBusy(false);
 
@@ -47,24 +53,19 @@ function LoginContent() {
           /
             ← Home
           </Link>
+
           <LanguageToggle />
         </div>
 
         <h1>{mode === 'login' ? t.login : t.signup}</h1>
 
-        <p className="muted">
-          {t.login} QR Curriculum.
-        </p>
+        <p className="muted">{t.login} QR Curriculum.</p>
 
         <form onSubmit={submit}>
           <label>
             {t.email}
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+            <input              type="email"              value={email}              onChange={(e) => setEmail(e.target.value)}              required            />
+  
           </label>
 
           <label>
@@ -88,9 +89,7 @@ function LoginContent() {
         <button
           className="linkButton"
           type="button"
-          onClick={() =>
-            setMode(mode === 'login' ? 'signup' : 'login')
-          }
+          onClick={() => setMode(mode === 'login' ? 'signup' : 'login')}
         >
           {mode === 'login'
             ? 'Non hai un account? Registrati'
