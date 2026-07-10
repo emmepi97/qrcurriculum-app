@@ -63,22 +63,154 @@ export default function DashboardPage(){
  }
  async function savePersonal(e){ e.preventDefault(); try{ setSaving(true); setError(''); setSuccess(''); const payload=cleanDateFields({...personal,user_id:session.user.id},['data_nascita']); const {data:saved,error:saveError}=await supabase.from('personal_info').upsert(payload,{onConflict:'user_id'}).select('*').single(); if(saveError) throw saveError; setPersonal(saved); setData(prev=>({...prev,personal_info:saved})); setSuccess(t.saved); setTimeout(()=>setSuccess(''),2500); }catch(e){ setError(e?.message||'Errore durante il salvataggio.'); }finally{ setSaving(false); } }
  async function logout(){ await supabase.auth.signOut(); router.push('/login'); }
- async function downloadPdf(){
-  const html2pdf=(await import('html2pdf.js')).default;
-  const root=document.getElementById('pdf-export-document') || document.getElementById('cv-document');
-  const page=root?.querySelector('.cv-page') || root;
-  if(!root || !page) return;
-  root.classList.add('pdfExportReady');
-  page.style.transform='none'; page.style.width='210mm'; page.style.minHeight='0'; page.style.maxHeight='none'; page.style.height='auto'; page.style.overflow='hidden';
-  await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
-  const a4=document.createElement('div'); a4.style.position='fixed'; a4.style.left='-10000px'; a4.style.top='0'; a4.style.width='210mm'; a4.style.height='297mm'; document.body.appendChild(a4);
-  const targetHeight=a4.getBoundingClientRect().height; a4.remove();
-  const actualHeight=page.scrollHeight || page.getBoundingClientRect().height || targetHeight;
-  const scale=Math.max(0.58,Math.min(1,targetHeight/actualHeight));
-  root.style.height=`${targetHeight}px`; root.style.overflow='hidden'; page.style.transformOrigin='top left'; page.style.transform=`scale(${scale})`; page.style.width=`${210/scale}mm`;
-  await html2pdf().set({margin:0,filename:`CV-${personal.nome||'online'}-${personal.cognome||''}.pdf`,image:{type:'jpeg',quality:.98},pagebreak:{mode:['avoid-all','css','legacy'],avoid:['.item','.section','.qr-portfolio-block']},html2canvas:{scale:2,useCORS:true,scrollX:0,scrollY:0,windowWidth:1200,backgroundColor:'#ffffff'},jsPDF:{unit:'mm',format:'a4',orientation:'portrait',compress:true}}).from(root).save();
-  page.style.transform='none'; page.style.width='210mm'; root.style.height=''; root.style.overflow=''; root.classList.remove('pdfExportReady');
+
+
+
+async function downloadPdf() {
+  const html2pdf = (await import('html2pdf.js')).default;
+
+  const root =
+    document.getElementById('pdf-export-document') ||
+    document.getElementById('cv-document');
+
+  const page = root?.querySelector('.cv-page') || root;
+
+  if (!root || !page) return;
+
+  const original = {
+    rootHeight: root.style.height,
+    rootWidth: root.style.width,
+    rootOverflow: root.style.overflow,
+    rootDisplay: root.style.display,
+    rootAlignItems: root.style.alignItems,
+    rootJustifyContent: root.style.justifyContent,
+    rootBackground: root.style.background,
+    pageTransform: page.style.transform,
+    pageTransformOrigin: page.style.transformOrigin,
+    pageWidth: page.style.width,
+    pageHeight: page.style.height,
+    pageMinHeight: page.style.minHeight,
+    pageMaxHeight: page.style.maxHeight,
+    pageOverflow: page.style.overflow,
+    pageMargin: page.style.margin
+  };
+
+  try {
+    root.classList.add('pdfExportReady');
+
+    /*
+      A4 verticale:
+      210mm x 297mm
+      Il contenitore root diventa esattamente una pagina A4.
+    */
+    root.style.width = '210mm';
+    root.style.height = '297mm';
+    root.style.overflow = 'hidden';
+    root.style.display = 'flex';
+    root.style.alignItems = 'center';
+    root.style.justifyContent = 'center';
+    root.style.background = '#ffffff';
+
+    /*
+      La pagina CV non deve avere bordo/ombra.
+      Deve partire da dimensione naturale A4.
+    */
+    page.style.width = '210mm';
+    page.style.height = 'auto';
+    page.style.minHeight = '0';
+    page.style.maxHeight = 'none';
+    page.style.overflow = 'visible';
+    page.style.margin = '0';
+    page.style.transform = 'none';
+    page.style.transformOrigin = 'center center';
+
+    await new Promise(resolve =>
+      requestAnimationFrame(() => requestAnimationFrame(resolve))
+    );
+
+    /*
+      Misuro dimensioni reali.
+    */
+    const rootRect = root.getBoundingClientRect();
+    const pageRect = page.getBoundingClientRect();
+
+    const scaleX = rootRect.width / pageRect.width;
+    const scaleY = rootRect.height / page.scrollHeight;
+
+    /*
+      Scelgo lo scale più restrittivo.
+      Se il CV entra già, massimo 1.
+      Se è troppo lungo, riduco.
+      Il minimo 0.52 evita testi invisibili.
+    */
+    const scale = Math.max(0.52, Math.min(1, scaleX, scaleY));
+
+    page.style.transform = `scale(${scale})`;
+    page.style.transformOrigin = 'center center';
+
+    /*
+      Con flex su root:
+      - justify-content center = centro orizzontale
+      - align-items center = centro verticale
+    */
+
+    await new Promise(resolve =>
+      requestAnimationFrame(() => requestAnimationFrame(resolve))
+    );
+
+    await html2pdf()
+      .set({
+        margin: 0,
+        filename: `CV-${personal.nome || 'online'}-${personal.cognome || ''}.pdf`,
+        image: {
+          type: 'jpeg',
+          quality: 0.98
+        },
+        pagebreak: {
+          mode: ['css', 'legacy'],
+          avoid: ['.item', '.section', '.qr-portfolio-block']
+        },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          scrollX: 0,
+          scrollY: 0,
+          windowWidth: 1200,
+          backgroundColor: '#ffffff'
+        },
+        jsPDF: {
+          unit: 'mm',
+          format: 'a4',
+          orientation: 'portrait',
+          compress: true
+        }
+      })
+      .from(root)
+      .save();
+
+  } finally {
+    root.style.height = original.rootHeight;
+    root.style.width = original.rootWidth;
+    root.style.overflow = original.rootOverflow;
+    root.style.display = original.rootDisplay;
+    root.style.alignItems = original.rootAlignItems;
+    root.style.justifyContent = original.rootJustifyContent;
+    root.style.background = original.rootBackground;
+
+    page.style.transform = original.pageTransform;
+    page.style.transformOrigin = original.pageTransformOrigin;
+    page.style.width = original.pageWidth;
+    page.style.height = original.pageHeight;
+    page.style.minHeight = original.pageMinHeight;
+    page.style.maxHeight = original.pageMaxHeight;
+    page.style.overflow = original.pageOverflow;
+    page.style.margin = original.pageMargin;
+
+    root.classList.remove('pdfExportReady');
+  }
 }
+
+ 
  if(loading) return <p className="muted" style={{padding:30}}>{t.loading}</p>;
  return <><FirstAccessTour/><datalist id="global-skills-list">{globalSkills.map(s=><option key={s} value={s}/>)}</datalist><header className="topbar"><div className="brandBlock"><strong>QR Curriculum</strong><span>{session?.user?.email}</span></div><nav><LanguageToggle/><Link href="/dashboard">{t.dashboard}</Link><Link href="/analytics">{t.analytics}</Link><Link href="/radar-skill">{t.radarSkill}</Link><Link href="/monetization">{t.monetization}</Link><Link href="/admin">Admin</Link><Link href="/ai-tools">{t.aiTools}</Link><Link href="/directory">{t.directory}</Link><Link href="/cv-versions">{t.cvVersions}</Link>{publicUrl&&<a href={publicUrl} target="_blank">{t.publicProfile}</a>}<button onClick={logout}>{t.logout}</button></nav></header><section className="heroPanel"><div className="cleanHero"><p className="eyebrow">Dashboard</p><h1>{lang==='en'?'Manage CV, QR and skills':'Gestisci CV, QR e competenze'}</h1><p>{lang==='en'?'Profile':'Profilo'}: /qrcv/{personal.public_slug||'nomeutente'}. {lang==='en'?'The QR tracks scans.':'Il QR traccia le scansioni.'}</p>{publicUrl&&<p className="publicUrl">{lang==='en'?'Public link':'Link pubblico'}: <a href={publicUrl}>{publicUrl}</a></p>}</div><div className="heroSide">{qrCode&&<img className="qrPreview" src={qrCode} alt="QR"/>}<button className="btn light" onClick={downloadPdf}>{t.downloadPdf}</button></div></section>{error&&<p className="bigError error">{error}</p>}{success&&<p className="bigError success">{success}</p>}<main className="workspace"><div className="editorColumn"><section className="smartSection wideSection"><div className="smartSectionHeader"><div><h2>{t.personalInfo}</h2><p>{t.personalInfoDesc}</p></div></div><form className="personalForm" onSubmit={savePersonal}><div className="personalGrid">{[['nome','Nome'],['cognome','Cognome'],['job_title','Job title'],['email_cv','Email CV'],['telefono','Telefono'],['citta_residenza','Città / City'],['nazione','Nazione / Country'],['public_slug','Nome utente URL']].map(([k,l])=><label key={k}>{l}<input value={personal[k]||''} onChange={e=>setPersonal({...personal,[k]:e.target.value})}/></label>)}<label>Data nascita<input type="date" value={personal.data_nascita||''} onChange={e=>setPersonal({...personal,data_nascita:e.target.value})}/></label><label className="wide">{t.profileImageUrl}<div className="photoInlinePreview"><input value={personal.photo_url||''} placeholder="https://..." onChange={e=>setPersonal({...personal,photo_url:e.target.value})}/><ImagePreview url={personal.photo_url}/></div></label><label className="wide">{t.about}<textarea rows={4} value={personal.summary||''} onChange={e=>setPersonal({...personal,summary:e.target.value})}/></label><label className="check compactCheck"><input type="checkbox" checked={Boolean(personal.is_public)} onChange={e=>setPersonal({...personal,is_public:e.target.checked})}/> {t.publicProfile}</label></div><div className="formFooter"><button className="btn primary" disabled={saving}>{saving?t.saving:t.save}</button></div></form></section><MonetizationPanel userId={session.user.id}/>
  <section className="smartSection wideSection"><div className="sectionTabs">{sectionConfigs.map(cfg=><button key={cfg.key} className={activeKey===cfg.key?'active':''} type="button" onClick={()=>setActiveKey(cfg.key)}>{cfg.title}{loadedSections[cfg.key]?<span>✓</span>:null}</button>)}</div>{sectionLoading&&sectionLoading!=='all'&&<p className="muted">{t.loading}</p>}{activeConfig&&loadedSections[activeConfig.key]?<SectionManager key={activeConfig.key} {...activeConfig} rows={data[activeConfig.key]||[]} userId={session.user.id} onChange={()=>reloadOne(activeConfig)} globalSkills={globalSkills}/>:<div className="lazyBox"><p className="muted">{sectionLoading===activeConfig?.key?t.loading:t.previewPartial}</p><button className="btn primary" onClick={()=>loadOne(activeConfig)}>{t.openSection}</button></div>}</section>
