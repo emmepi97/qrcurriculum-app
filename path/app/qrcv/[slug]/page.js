@@ -18,7 +18,7 @@ export default function PublicQrCvPage(){ const {slug}=useParams(); const params
   const targetHeight=a4.getBoundingClientRect().height; a4.remove();
   const actualHeight=page.scrollHeight || page.getBoundingClientRect().height || targetHeight;
   const scale=Math.max(0.58,Math.min(1,targetHeight/actualHeight));
-  root.style.height=`${targetHeight}px`; root.style.overflow='hidden'; page.style.transformOrigin='top left'; page.style.transform=`scale(${scale})`; page.style.width=`${210/scale}mm`;
+  root.style.height=`${targetHeight}px`; root.style.overflow='hidden'; page.style.transformOrigin='center center'; page.style.transform=`scale(${scale})`; page.style.width=`${210/scale}mm`;
   await html2pdf().set({margin:0,filename:'CV.pdf',image:{type:'jpeg',quality:.98},pagebreak:{mode:['avoid-all','css','legacy'],avoid:['.item','.section','.qr-portfolio-block']},html2canvas:{scale:2,useCORS:true,scrollX:0,scrollY:0,windowWidth:1200,backgroundColor:'#ffffff'},jsPDF:{unit:'mm',format:'a4',orientation:'portrait',compress:true}}).from(root).save();
   page.style.transform='none'; page.style.width='210mm'; root.style.height=''; root.style.overflow=''; root.classList.remove('pdfExportReady');
 } if(loading) return <p style={{padding:30}}>{t.loading}</p>; if(error) return <p className="error" style={{padding:30}}>{error}</p>; return <main className="publicPage"><div className="publicActions"><LanguageToggle/><button className="btn primary" onClick={downloadPdf}>{t.downloadPdf}</button></div><CvTemplate data={data} qrCode={qrCode} forcedLang={lang}/><div id="pdf-export-document" className="pdfExportOnly"><CvTemplate data={data} qrCode={qrCode} forcedLang={lang}/></div></main>; }
