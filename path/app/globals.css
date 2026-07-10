@@ -1802,146 +1802,323 @@ a {
     white-space: normal;
   }
 }
-
-
 /* =========================================================
-   PDF EXPORT - RIMOZIONE BORDI / OMBRE / CONTORNI
+   PDF EXPORT - FIX DEFINITIVO
+   Vale SOLO per il PDF nascosto.
+   Non modifica la preview, non modifica il CV pubblico,
+   non rompe il responsive.
    ========================================================= */
 
 #pdf-export-document,
-#cv-document {
+.pdfExpor*Only {
+  visibility: hidden !impor*ant;
+  position: fixed !important;
+  left: -10000px !important;
+  top: 0 !important;
+
+  width: 210mm !important;
+  height: 297mm !important;
+
+  overflow: hidden !important;
+  background: #ffffff !important;
+
+  pointer-events: none !important;
+  z-index: -1 !important;
+
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Quando parte il download, html2pdf deve poter leggere il contenuto */
+#pdf-export-document.pdfExportReady,
+.pdfExportOnly.pdfExportReady {
+  visibility: visible !important;
+}
+
+/* Contenitore A4 durante export */
+.pdfExportReady {
   background: #ffffff !important;
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
 }
 
+/* Pagina CV usata SOLO nel PDF */
 #pdf-export-document .cv-page,
-#cv-document .cv-page,
-.cv-page {
+.*dfExportOnly .cv-page {
+  visibili*y: visible !important;
+
+  width: 2*0mm !important;
+  max-width: 210mm*!important;
+  min-width: 210mm !important;
+
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+
+  margin: 0 !important;
+  padding: 6mm 7mm !important;
+
+  background: #ffffff !important;
+  color: #111827 !important;
+
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+
+  overflow: visible !important;
+  box-sizing: border-box !important;
+
+  font-family: Arial, sans-serif !important;
+  font-size: 7.1px !important;
+  line-height: 1.1 !important;
+}
+
+/* Rimuove qualsiasi bordo/ombra interna durante export */
+#pdf-export-document.pdfExportReady *,
+.pdfExportOnly.pdfExportReady * {
+  box-shadow: none !important;
+}
+
+#pdf-export-document.pdfExportReady .cv-page,
+.pdfExportOnly.pdfExportReady .cv-page {
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
   background: #ffffff !important;
 }
 
-/* Durante l'esportazione PDF elimina qualsiasi cornice */
-.pdfExportReady,
-.pdfExportReady * {
-  box-shadow: none !important;
+/* Evita elementi che escono dalla pagina */
+#pdf-export-document .cv-page *,
+.pdfExportOnly .cv-page * {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
 }
 
-.pdfExportReady .cv-page {
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* =========================================================
-   QR CODE COMPATTO NEL CV
-   ========================================================= */
-
-.qr-portfolio-block {
-  margin-top: 8px !important;
-  padding-top: 6px !important;
+/* Header CV */
+#pdf-export-document .header-flex,
+.pdfExportOnly .header-flex {
   display: flex !important;
+  justify-content: space-between !important;
   align-items: center !important;
-  gap: 8px !important;
-  font-size: 8px !important;
-  line-height: 1.15 !important;
+  gap: 5mm !important;
+  margin-bottom: 3mm !important;
 }
 
-.qr-portfolio-block img {
-  width: 54px !important;
-  height: 54px !important;
-  flex: 0 0 54px !important;
+/* Parte testuale header */
+#pdf-export-document .header-main,
+.pdfExportOnly .header-main {
+  min-width: 0 !important;
+  flex: 1 !important;
 }
 
-.qr-portfolio-block strong {
-  font-size: 8px !important;
+/* Nome principale */
+#pdf-export-document .cv-page h1,
+.pdfExportOnly .cv-page h1 {
+  font-size: 14px !important;
+  line-height: 1.05 !important;
+  margin: 0 0 2px 0 !important;
+  padding: 0 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Job title */
+#pdf-export-document .headline,
+.pdfExportOnly .headline {
+  font-size: 9px !important;
   line-height: 1.1 !important;
+  margin: 0 0 1px 0 !important;
+}
+
+/* Riga contatti */
+#pdf-export-document .contact-line,
+.pdfExportOnly .contact-line {
+  font-size: 6.3px !important;
+  line-height: 1.08 !important;
+  margin: 1px 0 0 0 !important;
+  color: #555555 !important;
+}
+
+/* Foto profilo */
+#pdf-export-document .avatar-box,
+.pdfExportOnly .avatar-box {
+  width: 19mm !important;
+  height: 19mm !important;
+  flex: 0 0 19mm !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  background: #eef2f7 !important;
+}
+
+/* Immagine profilo */
+#pdf-export-document .avatar-box img,
+#pdf-export-document .avatar-box .photoPreview,
+.pdfExportOnly .avatar-box img,
+.pdfExportOnly .avatar-box .photoPreview {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
   display: block !important;
 }
 
-.qr-portfolio-block p {
-  font-size: 7px !important;
+/* Titoli sezioni */
+#pdf-export-document .cv-page h2,
+.pdfExportOnly .cv-page h2 {
+  font-size: 8.8px !important;
+  line-height: 1.08 !important;
+  margin-top: 5px !important;
+  margin-bottom: 2px !important;
+  padding-bottom: 1px !important;
+  border-bottom: 1px solid #dddddd !important;
+}
+
+/* Titoli elementi */
+#pdf-export-document .cv-page h3,
+.pdfExportOnly .cv-page h3 {
+  font-size: 7.6px !important;
+  line-height: 1.08 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Testi */
+#pdf-export-document .cv-page p,
+.pdfExportOnly .cv-page p {
+  font-size: 7.1px !important;
   line-height: 1.1 !important;
-  margin: 1px 0 0 0 !important;
+  margin: 0 0 1px 0 !important;
+  padding: 0 !important;
+  white-space: pre-line !important;
 }
 
-/* =========================================================
-   CV COMPATTO PER PDF A UNA PAGINA
-   ========================================================= */
-
-.cv-page {
-  box-sizing: border-box !important;
-  width: 210mm !important;
-  max-width: 210mm !important;
-  padding: 10mm 12mm !important;
-  background: #ffffff !important;
-  color: #111827 !important;
-  font-size: 9px !important;
-  line-height: 1.22 !important;
-}
-
-.cv-page h1,
-.cv-page h2 {
-  margin: 0 0 3px 0 !important;
-  line-height: 1.05 !important;
-}
-
-.cv-page h1 {
-  font-size: 20px !important;
-}
-
-.cv-page h2 {
-  font-size: 12px !important;
-}
-
-.cv-page h3 {
-  font-size: 10px !important;
-  margin: 7px 0 3px 0 !important;
-  padding-bottom: 2px !important;
-  line-height: 1.1 !important;
-}
-
-.cv-page h4 {
-  font-size: 9px !important;
-  margin: 4px 0 1px 0 !important;
-  line-height: 1.1 !important;
-}
-
-.cv-page p {
-  margin: 1px 0 3px 0 !important;
-  line-height: 1.2 !important;
-}
-
-.cv-page .section {
-  margin-top: 6px !important;
-  margin-bottom: 4px !important;
-}
-
-.cv-page .item {
-  margin-bottom: 4px !important;
+/* Blocchi esperienza, formazione, progetti, premi */
+#pdf-export-document .item,
+.pdfExportOnly .item {
+  margin-bottom: 2px !important;
+  padding: 0 !important;
   break-inside: avoid !important;
   page-break-inside: avoid !important;
 }
 
-.cv-page ul {
-  margin: 2px 0 4px 14px !important;
+/* Header dei singoli elementi */
+#pdf-export-document .item-header,
+.pdfExportOnly .item-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  gap: 5px !important;
+}
+
+/* Date / metadati */
+#pdf-export-document .item-meta,
+#pdf-export-document .muted-small,
+.pdfExportOnly .item-meta,
+.pdfExportOnly .muted-small {
+  font-size: 6.3px !important;
+  line-height: 1.08 !important;
+  color: #555555 !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+/* Paragrafi dentro item */
+#pdf-export-document .item p,
+.pdfExportOnly .item p {
+  margin-top: 1px !important;
+  margin-bottom: 1px !important;
+}
+
+/* Liste lingue / competenze */
+#pdf-export-document .lang-list,
+.pdfExportOnly .lang-list {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 2px 3px !important;
+}
+
+/* Pill competenze e lingue */
+#pdf-export-document .tag-pill,
+#pdf-export-document .lang-pill,
+.pdfExportOnly .tag-pill,
+.pdfExportOnly .lang-pill {
+  display: inline-block !important;
+  font-size: 6.2px !important;
+  line-height: 1.05 !important;
+  padding: 1px 4px !important;
+  margin: 1px 2px 1px 0 !important;
+  border: 1px solid #aaaaaa !important;
+  border-radius: 999px !important;
+  background: #ffffff !important;
+}
+
+/* QR code compatto SOLO nel PDF */
+#pdf-export-document .qr-portfolio-block,
+.pdfExportOnly .qr-portfolio-block {
+  margin-top: 5px !important;
+  padding-top: 3px !important;
+
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+
+  gap: 6px !important;
+  text-align: left !important;
+
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+}
+
+/* Immagine QR più piccola */
+#pdf-export-document .qr-portfolio-block img,
+.pdfExportOnly .qr-portfolio-block img {
+  width: 42px !important;
+  height: 42px !important;
+  flex: 0 0 42px !important;
+}
+
+/* Testo QR */
+#pdf-export-document .qr-portfolio-block strong,
+.pdfExportOnly .qr-portfolio-block strong {
+  font-size: 6.5px !important;
+  line-height: 1.05 !important;
+  display: block !important;
+  margin: 0 !important;
+}
+
+/* Sottotesto QR */
+#pdf-export-document .qr-portfolio-block p,
+.pdfExportOnly .qr-portfolio-block p {
+  font-size: 6px !important;
+  line-height: 1.05 !important;
+  margin: 1px 0 0 0 !important;
   padding: 0 !important;
 }
 
-.cv-page li {
-  margin: 0 0 1px 0 !important;
-  line-height: 1.15 !important;
+/* Se usi ancora questa classe nel template */
+#pdf-export-document .qr-small-text,
+.pdfExportOnly .qr-small-text {
+  font-size: 6px !important;
+  line-height: 1.05 !important;
+  margin-top: 2px !important;
+  color: #555555 !important;
 }
+
+/* Sicurezza finale: niente bordo, niente ombra, niente outline */
 .pdfExportReady,
-.pdfExportReady * {
+.pdfExportReady *,
+#pdf-export-document,
+#pdf-export-document *,
+.pdfExportOnly,
+.pdfExportOnly * {
   box-shadow: none !important;
 }
 
-.pdfExportReady .cv-page {
+.pdfExportReady .cv-page,
+#pdf-export-document .cv-page,
+.pdfExportOnly .cv-page {
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
