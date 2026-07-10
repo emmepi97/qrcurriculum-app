@@ -34,7 +34,7 @@ export default function DashboardPage(){
 
  useEffect(()=>{supabase.auth.getSession().then(({data:s})=>{if(!s.session){router.push('/login');return;} setSession(s.session);});},[router]);
  useEffect(()=>{if(session?.user?.id) loadInitial();},[session?.user?.id]);
- useEffect(()=>{ if(!qrUrl) return; const id=setTimeout(()=>{QRCode.toDataURL(qrUrl,{width:180,margin:1}).then(setQrCode).catch(()=>{});},250); return ()=>clearTimeout(id); },[qrUrl]);
+ useEffect(()=>{ if(!qrUrl) return; const id=setTimeout(()=>{QRCode.toDataURL(qrUrl,{width:95,margin:1}).then(setQrCode).catch(()=>{});},250); return ()=>clearTimeout(id); },[qrUrl]);
  useEffect(()=>{ if(session?.user?.id && activeConfig && !loadedSections[activeConfig.key]) loadOne(activeConfig); },[session?.user?.id,activeConfig?.key]);
  useEffect(()=>{ if(session?.user?.id && !loading && !fullPreviewLoaded) loadFullPreview(); },[session?.user?.id,loading,fullPreviewLoaded]);
 
