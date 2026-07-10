@@ -1936,3 +1936,14 @@ a {
   margin: 0 0 1px 0 !important;
   line-height: 1.15 !important;
 }
+.pdfExportReady,
+.pdfExportReady * {
+  box-shadow: none !important;
+}
+
+.pdfExportReady .cv-page {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: #ffffff !important;
+}
