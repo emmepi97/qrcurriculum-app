@@ -1,0 +1,38 @@
+/* =========================================================
+   MODALE PREVIEW A SCHERMO INTERO
+   ========================================================= */
+
+.previewModal {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: #eef2f7;
+  display: flex;
+  flex-direction: column;
+}
+
+.previewModalTop {
+  min-height: 68px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 22px;
+}
+
+.previewModalBody {
+  flex: 1;
+  overflow: auto;
+  padding: clamp(12px, 3vw, 32px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #eef2f7;
+}
+
+.previewModalBody .cvSheetWrap {
+  width: 100%;
+  max-width: 210mm;
+  margin: 0 auto;
+}

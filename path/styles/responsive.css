@@ -1,0 +1,136 @@
+/* =========================================================
+   RESPONSIVE TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .marketingHero,
+  .radarTop {
+    grid-template-columns: 1fr;
+  }
+
+  .featureGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .howItWorks {
+    flex-direction: column;
+  }
+
+  .howItWorks ol {
+    min-width: 0;
+  }
+
+  .suggestionGrid,
+  .monetizationGrid,
+  .directoryGrid,
+  .analyticsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroPanel,
+  .workspace,
+  .bigError,
+  .analyticsGrid,
+  .radarPageLayout,
+  .directoryGrid,
+  .monetizationPage,
+  .adminTables,
+  .adminPanelCard,
+  .adminTabs,
+  .analyticsInfoBox {
+    width: calc(100vw - 18px);
+  }
+
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .radarSvgWrap {
+    min-height: auto;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE MOBILE
+   ========================================================= */
+
+@media (max-width: 680px) {
+  .marketingNav,
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .marketingHero {
+    padding-top: 24px;
+  }
+
+  .heroCopy h1 {
+    font-size: 36px;
+    letter-spacing: -1px;
+  }
+
+  .heroCopy p {
+    font-size: 17px;
+  }
+
+  .featureGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .profileMock,
+  .marketingFooter,
+  .heroPanel,
+  .smartSectionHeader,
+  .simpleRow {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .heroPanel,
+  .workspace,
+  .bigError,
+  .analyticsGrid,
+  .radarPageLayout,
+  .directoryGrid,
+  .monetizationPage,
+  .adminTables,
+  .adminPanelCard,
+  .adminTabs,
+  .analyticsInfoBox {
+    width: calc(100vw - 12px);
+  }
+
+  .heroPanel {
+    padding: 20px;
+  }
+
+  .cleanHero h1 {
+    font-size: 30px;
+  }
+
+  .quickFormActions .btn,
+  .formFooter .btn,
+  .previewActions .btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .barRow {
+    grid-template-columns: 1fr;
+  }
+
+  .simpleRowActions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .browserCard {
+    min-height: 0;
+  }
+
+  .cvPreviewViewport {
+    padding: 0;
+    min-height: 65vh;
+  }
+}

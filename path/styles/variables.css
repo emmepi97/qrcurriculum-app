@@ -1,0 +1,23 @@
+/* =========================================================
+   DESIGN TOKENS
+   Unica fonte di verità per colori, spaziature di base e ombre
+   usati nell'interfaccia applicativa (dashboard, marketing, admin...).
+   NB: il foglio CV (CvTemplate) NON usa queste variabili: vive nel
+   suo CSS Module isolato, per non essere mai influenzato da modifiche
+   al tema dell'app.
+   ========================================================= */
+
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #142033;
+  --muted: #667085;
+  --border: #dde4f0;
+  --primary: #1677ff;
+  --primary2: #0f4ea8;
+  --danger: #b42318;
+  --success: #137333;
+  --warning: #9a6700;
+  --shadow: 0 12px 32px rgba(16, 24, 40, 0.08);
+  --dark: #0b1630;
+}
