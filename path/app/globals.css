@@ -1868,3 +1868,71 @@ a {
   line-height: 1.1 !important;
   margin: 1px 0 0 0 !important;
 }
+
+/* =========================================================
+   CV COMPATTO PER PDF A UNA PAGINA
+   ========================================================= */
+
+.cv-page {
+  box-sizing: border-box !important;
+  width: 210mm !important;
+  max-width: 210mm !important;
+  padding: 10mm 12mm !important;
+  background: #ffffff !important;
+  color: #111827 !important;
+  font-size: 9px !important;
+  line-height: 1.22 !important;
+}
+
+.cv-page h1,
+.cv-page h2 {
+  margin: 0 0 3px 0 !important;
+  line-height: 1.05 !important;
+}
+
+.cv-page h1 {
+  font-size: 20px !important;
+}
+
+.cv-page h2 {
+  font-size: 12px !important;
+}
+
+.cv-page h3 {
+  font-size: 10px !important;
+  margin: 7px 0 3px 0 !important;
+  padding-bottom: 2px !important;
+  line-height: 1.1 !important;
+}
+
+.cv-page h4 {
+  font-size: 9px !important;
+  margin: 4px 0 1px 0 !important;
+  line-height: 1.1 !important;
+}
+
+.cv-page p {
+  margin: 1px 0 3px 0 !important;
+  line-height: 1.2 !important;
+}
+
+.cv-page .section {
+  margin-top: 6px !important;
+  margin-bottom: 4px !important;
+}
+
+.cv-page .item {
+  margin-bottom: 4px !important;
+  break-inside: avoid !important;
+  page-break-inside: avoid !important;
+}
+
+.cv-page ul {
+  margin: 2px 0 4px 14px !important;
+  padding: 0 !important;
+}
+
+.cv-page li {
+  margin: 0 0 1px 0 !important;
+  line-height: 1.15 !important;
+}
