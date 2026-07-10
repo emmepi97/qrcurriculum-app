@@ -1802,3 +1802,38 @@ a {
     white-space: normal;
   }
 }
+
+
+/* =========================================================
+   PDF EXPORT - RIMOZIONE BORDI / OMBRE / CONTORNI
+   ========================================================= */
+
+#pdf-export-document,
+#cv-document {
+  background: #ffffff !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+#pdf-export-document .cv-page,
+#cv-document .cv-page,
+.cv-page {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: #ffffff !important;
+}
+
+/* Durante l'esportazione PDF elimina qualsiasi cornice */
+.pdfExportReady,
+.pdfExportReady * {
+  box-shadow: none !important;
+}
+
+.pdfExportReady .cv-page {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
