@@ -36,12 +36,12 @@ function LoginContent() {  const router = useRouter();  const searchParams = use
     <main className="authPage">
       <div className="authCard">
         <div className="homeActions">
-          /
-            ← Home
-          </Link>
+  /
+    ← Home
+  </Link>
 
-          <LanguageToggle />
-        </div>
+  <LanguageToggle />
+</div>
 
         <h1>{mode === 'login' ? t.login : t.signup}</h1>
 
