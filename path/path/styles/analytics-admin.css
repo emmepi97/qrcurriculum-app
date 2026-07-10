@@ -1,0 +1,409 @@
+/* =========================================================
+   ANALYTICS / RADAR / MONETIZATION / ADMIN
+   ========================================================= */
+
+.analyticsGrid {
+  margin-bottom: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.metricCard span {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.metricCard strong {
+  display: block;
+  font-size: 42px;
+  margin-top: 8px;
+}
+
+.barList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: 120px 1fr 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.barRow div {
+  background: #edf2fb;
+  border-radius: 999px;
+  position: relative;
+  height: 26px;
+  overflow: hidden;
+}
+
+.barRow i {
+  display: block;
+  background: #1f6feb;
+  height: 100%;
+  border-radius: 999px;
+  min-width: 3px;
+}
+
+.barRow i.qrBar {
+  background: #13a37f;
+}
+
+.barRow b {
+  position: absolute;
+  left: 10px;
+  top: 5px;
+  font-size: 12px;
+}
+
+.radarPageLayout {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.radarTop {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 18px;
+}
+
+.radarSvgWrap {
+  background: #f8fbff;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  min-height: 520px;
+}
+
+.radarSvg {
+  width: min(720px, 100%);
+  height: auto;
+}
+
+.radarGrid {
+  fill: none;
+  stroke: #d8e1ef;
+  stroke-width: 1;
+}
+
+.radarAxis {
+  stroke: #d8e1ef;
+  stroke-width: 1;
+}
+
+.radarLabel {
+  font-size: 11px;
+  fill: #475467;
+  font-weight: 800;
+}
+
+.radarArea {
+  fill: rgba(31, 111, 235, 0.22);
+  stroke: #1f6feb;
+  stroke-width: 2;
+}
+
+.radarDot {
+  fill: #1f6feb;
+}
+
+.scoreCircle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: conic-gradient(var(--primary) var(--score), #e5eaf2 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.scoreCircle strong {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+}
+
+.tagCloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tagPill {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #ffffff;
+  padding: 7px 10px;
+  font-weight: 800;
+}
+
+.suggestionGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.suggestionCard {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 14px;
+}
+
+.photoPreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photoInlinePreview {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.photoInlinePreview .imagePlaceholder,
+.photoInlinePreview .photoPreview {
+  width: 74px;
+  height: 74px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+}
+
+.imagePlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef2f7;
+  color: #667085;
+  font-weight: 900;
+}
+
+.sectionTabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.sectionTabs button {
+  border: 1px solid var(--border);
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.sectionTabs button.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+.sectionTabs button span {
+  margin-left: 6px;
+}
+
+.lazyBox {
+  border: 1px dashed #cbd5e1;
+  background: #f8fafc;
+  border-radius: 18px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.monetizationGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.miniCard {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 16px;
+  margin-top: 12px;
+}
+
+.miniCard.full {
+  grid-column: 1 / -1;
+}
+
+.checkGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.reviewCard {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 14px;
+  margin: 10px 0;
+}
+
+.paywallBox {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 22px;
+  padding: 24px;
+  text-align: center;
+}
+
+.directoryGrid {
+  margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.adminTabs {
+  margin-bottom: 14px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.adminTabs button {
+  border: 1px solid var(--border);
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.adminTabs button.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+.adminSearch input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+  margin: 12px 0;
+}
+
+.adminCheck {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+  background: #ffffff;
+}
+
+.adminTableWrap {
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.adminDataTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.adminDataTable th,
+.adminDataTable td {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.adminDataTable th {
+  background: #f8fafc;
+  font-weight: 900;
+}
+
+.adminDataTable button {
+  border: 0;
+  background: transparent;
+  color: var(--primary);
+  font-weight: 900;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.adminDataTable button.danger {
+  color: var(--danger);
+}
+
+.monetizationExplain p {
+  margin-bottom: 0;
+}
+
+/* =========================================================
+   TOUR
+   ========================================================= */
+
+.tourOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.58);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+}
+
+.tourCard {
+  width: min(520px, 100%);
+  background: #ffffff;
+  border-radius: 26px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28);
+  padding: 26px;
+}
+
+.tourProgress {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.tourProgress span {
+  display: block;
+  height: 100%;
+  background: var(--primary);
+}
+
+.tourStep {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 800;
+}

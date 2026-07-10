@@ -1,0 +1,31 @@
+/* =========================================================
+   RESET GENERALE
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, Arial, sans-serif;
+}
+
+body > div,
+body main {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+}
+
+a {
+  color: inherit;
+}

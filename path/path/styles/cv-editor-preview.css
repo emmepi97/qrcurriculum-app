@@ -1,0 +1,103 @@
+/* =========================================================
+   ANTEPRIMA CV NELLA DASHBOARD
+   Questo file stila solo il "riquadro" che ospita il foglio CV
+   nella colonna laterale dell'editor (bordo, toolbar, zoom).
+   Il foglio A4 vero e proprio (sfondo bianco, tipografia,
+   auto-scaling) vive interamente in CvTemplate.module.css e
+   non viene mai toccato da queste regole.
+   ========================================================= */
+
+.previewSticky {
+  position: relative;
+  top: auto;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 14px;
+}
+
+.previewHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.previewActions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.previewNote {
+  font-size: 12px;
+  margin: 3px 0 0;
+}
+
+.previewToolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0 0 10px;
+  flex-wrap: wrap;
+}
+
+.previewToolbar span {
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.previewToolbar button {
+  border: 1px solid var(--border);
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.previewToolbar button.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+/* Contenitore scrollabile che centra il foglio A4.
+   La larghezza del foglio è governata dallo zoom (%), mai da px fissi. */
+.cvPreviewViewport {
+  width: 100%;
+  min-height: 60vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #eef2f7;
+  border-radius: 14px;
+  padding: clamp(10px, 2vw, 24px);
+}
+
+.cvPreviewCanvas {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  transition: max-width 0.15s ease;
+}
+
+.cvPreviewViewport.zoom-100 .cvPreviewCanvas {
+  max-width: 210mm;
+}
+
+.cvPreviewViewport.zoom-125 .cvPreviewCanvas {
+  max-width: calc(210mm * 1.25);
+}
+
+.cvPreviewViewport.zoom-150 .cvPreviewCanvas {
+  max-width: calc(210mm * 1.5);
+}

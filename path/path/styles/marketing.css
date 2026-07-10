@@ -1,0 +1,254 @@
+/* =========================================================
+   LANDING / MARKETING PAGE
+   ========================================================= */
+
+.marketingPage {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top right, #dbeafe, transparent 34%),
+    linear-gradient(180deg, #f8fbff, #eef3fb);
+}
+
+.marketingNav {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.logoMark {
+  font-size: 24px;
+  font-weight: 950;
+  color: var(--dark);
+  text-decoration: none;
+}
+
+.logoMark span {
+  color: var(--primary);
+}
+
+.marketingNav nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-weight: 800;
+}
+
+.marketingHero {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 52px 22px 30px;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.heroCopy h1 {
+  font-size: 62px;
+  line-height: 0.98;
+  margin: 18px 0;
+  letter-spacing: -2px;
+  color: var(--dark);
+}
+
+.heroCopy p {
+  font-size: 21px;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 720px;
+}
+
+.badge {
+  display: inline-flex;
+  background: #eaf2ff;
+  color: #174ea6;
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-weight: 900;
+}
+
+.heroCtas,
+.homeActions,
+.topbar nav,
+.heroSide,
+.simpleRowActions,
+.tourActions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.trustStrip {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+.trustStrip span {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-weight: 800;
+  color: #344054;
+}
+
+.browserCard {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: 0 30px 80px rgba(16, 24, 40, 0.14);
+  padding: 18px;
+  min-height: 390px;
+}
+
+.browserTop {
+  display: flex;
+  gap: 7px;
+  margin-bottom: 18px;
+}
+
+.browserTop i {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #c8d3e4;
+}
+
+.profileMock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #13233f, #2d73e6);
+  color: #ffffff;
+  border-radius: 22px;
+  padding: 22px;
+}
+
+.profileMock h3 {
+  font-size: 28px;
+  margin: 0 0 6px;
+}
+
+.qrMock {
+  width: 86px;
+  height: 86px;
+  border-radius: 16px;
+  background: repeating-linear-gradient(45deg, #ffffff 0 9px, #13233f 9px 14px);
+}
+
+.mockLine {
+  height: 14px;
+  background: #e6ecf5;
+  border-radius: 999px;
+  margin-top: 16px;
+  width: 62%;
+}
+
+.mockLine.large {
+  width: 94%;
+  margin-top: 28px;
+}
+
+.mockGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.mockGrid span {
+  height: 100px;
+  background: #f0f5fc;
+  border-radius: 18px;
+}
+
+.featureGrid {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 28px 22px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.featureGrid article,
+.howItWorks,
+.authCard,
+.smartSection,
+.legalCard,
+.metricCard {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.featureGrid strong {
+  color: var(--primary);
+  font-weight: 900;
+}
+
+.featureGrid p,
+.howItWorks p {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.howItWorks {
+  max-width: 1176px;
+  margin: 18px auto 34px;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.howItWorks h2 {
+  font-size: 34px;
+  margin: 0 0 8px;
+}
+
+.howItWorks ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+  min-width: 420px;
+}
+
+.howItWorks li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+}
+
+.howItWorks li span {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marketingFooter {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 24px 22px 40px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-weight: 800;
+}
