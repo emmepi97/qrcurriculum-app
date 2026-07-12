@@ -1,8 +1,20 @@
 'use client';
 
-import { Suspense, useState } from 'react'; import { useRouter, useSearchParams } from 'next/navigation'; import Link from 'next/link'; import supabase from '@/lib/supabaseClient'; import { LanguageToggle, useLang } from '@/components/LanguageProvider';
+import { Suspense, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import supabase from '@/lib/supabaseClient';
+import {
+  LanguageToggle,
+  useLang,
+} from '@/components/LanguageProvider';
 
-function LoginContent() {  const router = useRouter();  const searchParams = useSearchParams();  const nextUrl = searchParams.get('next') || '/dashboard';  const { t } = useLang();
+function LoginContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const nextUrl = searchParams.get('next') || '/dashboard';
+  const { t } = useLang();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [mode, setMode] = useState('login');
@@ -13,6 +25,7 @@ function LoginContent() {  const router = useRouter();  const searchParams = use
     e.preventDefault();
     setBusy(true);
     setMsg('');
+
     const res =
       mode === 'login'
         ? await supabase.auth.signInWithPassword({
@@ -25,10 +38,12 @@ function LoginContent() {  const router = useRouter();  const searchParams = use
           });
 
     setBusy(false);
+
     if (res.error) {
       setMsg(res.error.message);
       return;
     }
+
     router.push(nextUrl);
   }
 
@@ -36,16 +51,18 @@ function LoginContent() {  const router = useRouter();  const searchParams = use
     <main className="authPage">
       <div className="authCard">
         <div className="homeActions">
-  /
-    ← Home
-  </Link>
+          <Link href="/">
+            ← Home
+          </Link>
 
-  <LanguageToggle />
-</div>
+          <LanguageToggle />
+        </div>
 
         <h1>{mode === 'login' ? t.login : t.signup}</h1>
 
-        <p className="muted">{t.login} QR Curriculum.</p>
+        <p className="muted">
+          {t.login} QR Curriculum.
+        </p>
 
         <form onSubmit={submit}>
           <label>
@@ -64,16 +81,35 @@ function LoginContent() {  const router = useRouter();  const searchParams = use
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required              minLength={6}
+              required
+              minLength={6}
             />
           </label>
+
           {msg && <p className="error">{msg}</p>}
-          <button className="btn primary" disabled={busy}>            {busy ? '...' : mode === 'login' ? t.login : t.signup}          </button>
+
+          <button
+            className="btn primary"
+            disabled={busy}
+          >
+            {busy
+              ? '...'
+              : mode === 'login'
+              ? t.login
+              : t.signup}
+          </button>
         </form>
 
         <button
-          className="linkButton"          type="button"          onClick={() => setMode(mode === 'login' ? 'signup' : 'login')}        >
-          {mode === 'login'            ? 'Non hai un account? Registrati'            : 'Hai già un account? Accedi'}
+          className="linkButton"
+          type="button"
+          onClick={() =>
+            setMode(mode === 'login' ? 'signup' : 'login')
+          }
+        >
+          {mode === 'login'
+            ? 'Non hai un account? Registrati'
+            : 'Hai già un account? Accedi'}
         </button>
       </div>
     </main>
