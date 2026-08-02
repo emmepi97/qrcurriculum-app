@@ -1,0 +1,3 @@
+'use client';
+import { useRouter } from 'next/navigation';import { useState } from 'react';import { useLang } from '@/components/LanguageProvider';
+export default function ConsultationCTA({userId,email='',source='dashboard'}){const router=useRouter();const{lang,t}=useLang();const[busy,setBusy]=useState(false);async function click(){setBusy(true);try{await fetch('/api/consultation-click',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userId,email,source})})}catch{}finally{router.push('/consultation')}}return <button type="button" className="btn dark" disabled={busy} onClick={click}>{busy?'...':t.consultation}</button>}
