@@ -5,7 +5,7 @@ import { LanguageToggle, useLang } from '@/components/LanguageProvider';
 const COPY = {
   it: {
     badge: 'CV digitale, QR code e portfolio professionale',
-    title: 'Digitalizza e<br />monitora il<br />tuo curriculum.',
+    title: 'Digitalizza e monitora il tuo curriculum.',
     text: 'Crea un profilo chiaro, moderno e condivisibile: esperienze, competenze, progetti, recensioni, video e QR code in un unico spazio sempre aggiornato.',
     primary: 'Crea il tuo CV digitale',
     secondary: 'Guarda le funzionalità',
